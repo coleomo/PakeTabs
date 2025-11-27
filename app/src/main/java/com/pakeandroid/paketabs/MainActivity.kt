@@ -1,14 +1,18 @@
 package com.pakeandroid.paketabs
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -43,6 +47,29 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
 
         if (tabs.isEmpty()) {
             addNewTab(DEFAULT_HOME_URL)
+        }
+
+        //使用刘海屏也需要这一句进行全屏处理
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowInsetsControllerCompat(window, window.decorView).let {
+            //隐藏状态栏和导航栏
+            //用于WindowInsetsCompat.Type.systemBars()隐藏两个系统栏
+            //用于WindowInsetsCompat.Type.statusBars()仅隐藏状态栏
+            //用于WindowInsetsCompat.Type.navigationBars()仅隐藏导航栏
+            it.hide(WindowInsetsCompat.Type.systemBars())
+            //交互效果
+            //BEHAVIOR_SHOW_BARS_BY_SWIPE 下拉状态栏操作可能会导致activity画面变形
+            //BEHAVIOR_SHOW_BARS_BY_TOUCH 未测试到与BEHAVIOR_SHOW_BARS_BY_SWIPE的明显差异
+            //BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE 下拉或上拉的屏幕交互操作会显示状态栏和导航栏
+            it.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
+        //允许window 的内容可以上移到刘海屏状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val lp = window.attributes
+            lp.layoutInDisplayCutoutMode =
+                WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+            window.attributes = lp
         }
     }
 
