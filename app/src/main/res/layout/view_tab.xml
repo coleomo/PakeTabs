@@ -9,7 +9,7 @@
     android:layout_gravity="start"
     android:paddingStart="16dp"
     android:paddingEnd="8dp"
-    android:background="?attr/colorSurfaceVariant">
+    android:background="@drawable/tab_background">
 
     <TextView
         android:id="@+id/tabTitle"
