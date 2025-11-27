@@ -20,6 +20,8 @@
         app:tabPaddingEnd="0dp"
         app:tabPaddingStart="1dp"
         app:tabContentStart="0dp"
+        app:tabIndicatorGravity="bottom"
+        app:tabIndicatorHeight="2dp"
         app:tabMode="scrollable" />
 
     <androidx.viewpager2.widget.ViewPager2
