@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
         viewPager = findViewById(R.id.viewPager)
         tabsAdapter = BrowserTabsAdapter(this)
         viewPager.adapter = tabsAdapter
+        // 不允许左右滑动切换tab
         viewPager.isUserInputEnabled = false
 
         tabMediator = TabLayoutMediator(tabLayout, viewPager) { tab, position ->
