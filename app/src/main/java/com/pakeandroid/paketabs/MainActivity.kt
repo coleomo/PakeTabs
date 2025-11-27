@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
         viewPager = findViewById(R.id.viewPager)
         tabsAdapter = BrowserTabsAdapter(this)
         viewPager.adapter = tabsAdapter
+        viewPager.isUserInputEnabled = false
 
         tabMediator = TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.customView = createTabView(tab, position)
