@@ -10,7 +10,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:background="?attr/colorSurface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,8 +20,8 @@
         app:tabPaddingEnd="0dp"
         app:tabPaddingStart="1dp"
         app:tabContentStart="0dp"
-        app:tabIndicatorGravity="bottom"
-        app:tabIndicatorHeight="2dp"
+        app:tabIndicatorGravity="center"
+        app:tabIndicatorHeight="0dp"
         app:tabMode="scrollable" />
 
     <androidx.viewpager2.widget.ViewPager2
