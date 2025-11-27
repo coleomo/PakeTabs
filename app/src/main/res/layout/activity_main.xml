@@ -17,6 +17,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tabGravity="start"
         app:tabIndicatorColor="?attr/colorPrimary"
+        app:tabPaddingEnd="0dp"
+        app:tabPaddingStart="1dp"
+        app:tabContentStart="0dp"
         app:tabMode="scrollable" />
 
     <androidx.viewpager2.widget.ViewPager2
