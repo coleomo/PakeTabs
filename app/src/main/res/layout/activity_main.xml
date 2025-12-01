@@ -22,12 +22,14 @@
             android:layout_width="40dp"
             android:layout_height="32dp"
             android:text="主页"
+            android:gravity="center"
             android:layout_marginStart="20dp"
             tools:ignore="HardcodedText" />
         <TextView
             android:id="@+id/reload"
             android:layout_width="40dp"
             android:layout_height="32dp"
+            android:gravity="center"
             android:text="刷新"
             tools:ignore="HardcodedText" />
     </LinearLayout>
@@ -36,12 +38,12 @@
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:background="?attr/colorSecondary"
+        android:background="?attr/colorSurfaceVariant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tools"
         app:tabGravity="start"
-        app:tabIndicatorColor="?attr/colorPrimary"
+        app:tabIndicatorColor="@color/cardview_dark_background"
         app:tabPaddingEnd="0dp"
         app:tabPaddingStart="0dp"
         app:tabContentStart="0dp"

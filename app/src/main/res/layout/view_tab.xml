@@ -14,18 +14,19 @@
     <TextView
         android:id="@+id/tabTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:maxWidth="100dp"
         android:paddingEnd="5dp"
         android:maxLines="1"
         android:ellipsize="end"
+        android:gravity="center"
         android:textAppearance="?attr/textAppearanceBodyMedium"
         android:textColor="?attr/colorOnSurface"
         tools:ignore="RtlSymmetry" />
 
     <ImageButton
         android:id="@+id/tabClose"
-        android:layout_width="32dp"
+        android:layout_width="30dp"
         android:layout_height="32dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/tab_close"
