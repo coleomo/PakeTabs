@@ -18,12 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         >
         <TextView
+            android:id="@+id/homeBtn"
             android:layout_width="40dp"
             android:layout_height="32dp"
             android:text="主页"
             android:layout_marginStart="20dp"
             tools:ignore="HardcodedText" />
         <TextView
+            android:id="@+id/reload"
             android:layout_width="40dp"
             android:layout_height="32dp"
             android:text="刷新"

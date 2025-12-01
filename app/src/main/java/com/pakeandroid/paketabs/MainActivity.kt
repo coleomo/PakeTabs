@@ -129,10 +129,16 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
         val titleView = view.findViewById<TextView>(R.id.tabTitle)
         val closeButton = view.findViewById<ImageButton>(R.id.tabClose)
         titleView.text = tabs[position].title
-        closeButton.setOnClickListener {
-            val currentPos = tab.position
-            if (currentPos != TabLayout.Tab.INVALID_POSITION) {
-                closeTab(currentPos)
+        // 关闭标签页
+        if(position == 0) {
+            closeButton.visibility = View.GONE
+        }else{
+            closeButton.visibility = View.VISIBLE
+            closeButton.setOnClickListener {
+                val currentPos = tab.position
+                if (currentPos != TabLayout.Tab.INVALID_POSITION) {
+                    closeTab(currentPos)
+                }
             }
         }
         return view
