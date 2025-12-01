@@ -7,6 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:id="@+id/tools"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:orientation="horizontal"
+        android:gravity="start"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="32dp"
+            android:text="主页"
+            android:layout_marginStart="20dp"
+            tools:ignore="HardcodedText" />
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="32dp"
+            android:text="刷新"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
@@ -14,7 +37,7 @@
         android:background="?attr/colorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tools"
         app:tabGravity="start"
         app:tabIndicatorColor="?attr/colorPrimary"
         app:tabPaddingEnd="0dp"
@@ -22,6 +45,7 @@
         app:tabContentStart="0dp"
         app:tabIndicatorGravity="center"
         app:tabIndicatorHeight="0dp"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
         app:tabMode="scrollable" />
 
     <androidx.viewpager2.widget.ViewPager2
