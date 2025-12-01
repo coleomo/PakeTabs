@@ -2,13 +2,19 @@ package com.pakeandroid.paketabs
 
 import android.os.Build
 import android.os.Bundle
+import android.text.InputType
+import android.view.ContextMenu
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -30,6 +36,8 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        // 为根视图注册长按菜单（右键菜单）
+        registerForContextMenu(findViewById(R.id.main))
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -73,6 +81,50 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
                 WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
             window.attributes = lp
         }
+    }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        menu.setHeaderTitle("操作")
+        menu.add(0, MENU_EXIT_APP, 0, "退出程序")
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            MENU_EXIT_APP -> {
+                showExitPasswordDialog()
+                true
+            }
+
+            else -> super.onContextItemSelected(item)
+        }
+    }
+
+    private fun showExitPasswordDialog() {
+        val input = EditText(this).apply {
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        }
+        AlertDialog.Builder(this)
+            .setTitle("请输入密码")
+            .setView(input)
+            .setPositiveButton("确定") { dialog, _ ->
+                val password = input.text.toString()
+                if (password == EXIT_PASSWORD) {
+                    dialog.dismiss()
+                    // 关闭当前应用所有 Activity
+                    finishAffinity()
+                } else {
+                    Toast.makeText(this, "密码错误", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("取消") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     override fun onDestroy() {
@@ -164,5 +216,7 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
 
     companion object {
         private const val DEFAULT_HOME_URL = "https://juejin.cn/"
+        private const val MENU_EXIT_APP = 1001
+        private const val EXIT_PASSWORD = "123456"
     }
 }
