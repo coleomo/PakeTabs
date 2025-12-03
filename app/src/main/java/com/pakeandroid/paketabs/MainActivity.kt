@@ -19,6 +19,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -47,9 +48,10 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
         viewPager = findViewById(R.id.viewPager)
         tabsAdapter = BrowserTabsAdapter(this)
         viewPager.adapter = tabsAdapter
+        viewPager.setPageTransformer(null)
         // 不允许左右滑动切换tab
         viewPager.isUserInputEnabled = false
-
+        //
         tabMediator = TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.customView = createTabView(tab, position)
         }
@@ -108,7 +110,7 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         }
         AlertDialog.Builder(this)
-            .setTitle("请输入密码")
+            .setTitle("请输入密码以确定退出")
             .setView(input)
             .setPositiveButton("确定") { dialog, _ ->
                 val password = input.text.toString()
@@ -154,7 +156,7 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
         )
         tabs.add(newTab)
         tabsAdapter.notifyItemInserted(tabs.lastIndex)
-        viewPager.setCurrentItem(tabs.lastIndex, true)
+        viewPager.setCurrentItem(tabs.lastIndex, false)
     }
 
     private fun closeTab(position: Int) {
@@ -165,7 +167,7 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
             addNewTab(DEFAULT_HOME_URL)
         } else {
             val nextIndex = position.coerceAtMost(tabs.lastIndex)
-            viewPager.setCurrentItem(nextIndex, true)
+            viewPager.setCurrentItem(nextIndex, false)
         }
     }
 
