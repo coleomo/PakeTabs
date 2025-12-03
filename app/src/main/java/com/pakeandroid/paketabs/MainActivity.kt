@@ -50,6 +50,9 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
         // 不允许左右滑动切换tab
         viewPager.isUserInputEnabled = false
 
+        // 设置主页按钮和刷新按钮的点击事件
+        setupToolbarButtons()
+
         tabMediator = TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.customView = createTabView(tab, position)
         }
@@ -175,6 +178,33 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
         titleView.text = tabs[position].title
     }
 
+    /**
+     * 设置工具栏按钮（主页和刷新）的点击事件
+     */
+    private fun setupToolbarButtons() {
+        val homeBtn = findViewById<TextView>(R.id.homeBtn)
+        val reloadBtn = findViewById<TextView>(R.id.reload)
+
+        // 主页按钮：加载默认URL
+        homeBtn.setOnClickListener {
+            getCurrentFragment()?.loadUrl(DEFAULT_HOME_URL)
+        }
+
+        // 刷新按钮：刷新当前页面
+        reloadBtn.setOnClickListener {
+            getCurrentFragment()?.reload()
+        }
+    }
+
+    /**
+     * 获取当前激活的Fragment
+     */
+    private fun getCurrentFragment(): BrowserTabFragment? {
+        val currentItem = viewPager.currentItem
+        if (currentItem !in tabs.indices) return null
+        return tabsAdapter.getFragmentAt(currentItem)
+    }
+
     private fun createTabView(tab: TabLayout.Tab, position: Int): View {
         val view = LayoutInflater.from(this).inflate(R.layout.view_tab, null)
         val titleView = view.findViewById<TextView>(R.id.tabTitle)
@@ -197,14 +227,31 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
 
     private inner class BrowserTabsAdapter(activity: AppCompatActivity) :
         FragmentStateAdapter(activity) {
+        
+        // 保存Fragment引用的Map，key为tabId
+        private val fragmentMap = mutableMapOf<Long, BrowserTabFragment>()
+        
         override fun getItemCount(): Int = tabs.size
 
-        override fun createFragment(position: Int) =
-            BrowserTabFragment.newInstance(tabs[position].id, tabs[position].initialUrl)
+        override fun createFragment(position: Int): BrowserTabFragment {
+            val tabId = tabs[position].id
+            val fragment = BrowserTabFragment.newInstance(tabId, tabs[position].initialUrl)
+            fragmentMap[tabId] = fragment
+            return fragment
+        }
 
         override fun getItemId(position: Int): Long = tabs[position].id
 
         override fun containsItem(itemId: Long): Boolean = tabs.any { it.id == itemId }
+        
+        /**
+         * 获取指定位置的Fragment
+         */
+        fun getFragmentAt(position: Int): BrowserTabFragment? {
+            if (position !in tabs.indices) return null
+            val tabId = tabs[position].id
+            return fragmentMap[tabId]
+        }
     }
 
     private data class TabEntry(

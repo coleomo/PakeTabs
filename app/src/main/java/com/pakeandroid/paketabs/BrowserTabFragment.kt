@@ -111,6 +111,20 @@ class BrowserTabFragment : Fragment() {
     private val tabId: Long
         get() = requireArguments().getLong(ARG_TAB_ID)
 
+    /**
+     * 加载指定的URL
+     */
+    fun loadUrl(url: String) {
+        webView?.loadUrl(url)
+    }
+
+    /**
+     * 刷新当前页面
+     */
+    fun reload() {
+        webView?.reload()
+    }
+
     companion object {
         private const val ARG_TAB_ID = "tab_id"
         private const val ARG_INITIAL_URL = "initial_url"
