@@ -89,8 +89,7 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
         menuInfo: ContextMenu.ContextMenuInfo?
     ) {
         super.onCreateContextMenu(menu, v, menuInfo)
-        menu.setHeaderTitle("操作")
-        menu.add(0, MENU_EXIT_APP, 0, "退出程序")
+        menu.add(0, MENU_EXIT_APP, 0, "退出")
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
