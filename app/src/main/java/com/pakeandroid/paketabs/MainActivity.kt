@@ -157,7 +157,7 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
         )
         tabs.add(newTab)
         tabsAdapter.notifyItemInserted(tabs.lastIndex)
-        viewPager.setCurrentItem(tabs.lastIndex, true)
+        viewPager.setCurrentItem(tabs.lastIndex, false)
     }
 
     private fun closeTab(position: Int) {
@@ -168,7 +168,7 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
             addNewTab(DEFAULT_HOME_URL)
         } else {
             val nextIndex = position.coerceAtMost(tabs.lastIndex)
-            viewPager.setCurrentItem(nextIndex, true)
+            viewPager.setCurrentItem(nextIndex, false)
         }
     }
 
