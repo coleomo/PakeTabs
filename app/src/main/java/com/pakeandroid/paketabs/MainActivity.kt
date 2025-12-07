@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         }
         AlertDialog.Builder(this)
-            .setTitle("请输入密码")
+            .setTitle("请输入密码以退出应用")
             .setView(input)
             .setPositiveButton("确定") { dialog, _ ->
                 val password = input.text.toString()
@@ -184,6 +184,7 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
     private fun setupToolbarButtons() {
         val homeBtn = findViewById<TextView>(R.id.homeBtn)
         val reloadBtn = findViewById<TextView>(R.id.reload)
+        val quitBtn = findViewById<TextView>(R.id.quit)
 
         // 主页按钮：加载默认URL
         homeBtn.setOnClickListener {
@@ -193,6 +194,11 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
         // 刷新按钮：刷新当前页面
         reloadBtn.setOnClickListener {
             getCurrentFragment()?.reload()
+        }
+
+        // 退出按钮：弹出密码框
+        quitBtn.setOnClickListener {
+            showExitPasswordDialog()
         }
     }
 

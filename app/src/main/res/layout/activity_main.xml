@@ -8,49 +8,63 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/tools"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:id="@+id/tabBarContainer"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
         android:orientation="horizontal"
-        android:gravity="start"
+        android:background="?attr/colorSurfaceVariant"
+        android:baselineAligned="false"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         >
-        <TextView
-            android:id="@+id/homeBtn"
-            android:layout_width="40dp"
-            android:layout_height="32dp"
-            android:text="主页"
-            android:gravity="center"
-            android:layout_marginStart="20dp"
-            tools:ignore="HardcodedText" />
-        <TextView
-            android:id="@+id/reload"
-            android:layout_width="40dp"
-            android:layout_height="32dp"
-            android:gravity="center"
-            android:text="刷新"
-            tools:ignore="HardcodedText" />
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tools"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:minWidth="80dp"
+            >
+            <TextView
+                android:id="@+id/homeBtn"
+                android:layout_width="40dp"
+                android:layout_height="32dp"
+                android:text="主页"
+                android:gravity="center"
+                android:layout_marginStart="8dp"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/reload"
+                android:layout_width="40dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="刷新"
+                tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/quit"
+                android:layout_width="40dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="退出"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:background="?attr/colorSurfaceVariant"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tools"
-        app:tabGravity="start"
-        app:tabIndicatorColor="@color/cardview_dark_background"
-        app:tabPaddingEnd="0dp"
-        app:tabPaddingStart="0dp"
-        app:tabContentStart="0dp"
-        app:tabIndicatorGravity="center"
-        app:tabIndicatorHeight="0dp"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
-        app:tabMode="scrollable" />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tabGravity="start"
+            app:tabIndicatorColor="@color/cardview_dark_background"
+            app:tabPaddingEnd="0dp"
+            app:tabPaddingStart="0dp"
+            app:tabContentStart="0dp"
+            app:tabIndicatorGravity="center"
+            app:tabIndicatorHeight="0dp"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
+            app:tabMode="scrollable" />
+    </LinearLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
@@ -59,6 +73,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@id/tabBarContainer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
