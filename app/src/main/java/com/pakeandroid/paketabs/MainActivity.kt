@@ -23,6 +23,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
 
@@ -107,26 +109,33 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
     }
 
     private fun showExitPasswordDialog() {
-        val input = EditText(this).apply {
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-        }
-        AlertDialog.Builder(this)
-            .setTitle("请输入密码以退出应用")
-            .setView(input)
-            .setPositiveButton("确定") { dialog, _ ->
-                val password = input.text.toString()
-                if (password == EXIT_PASSWORD) {
-                    dialog.dismiss()
-                    // 关闭当前应用所有 Activity
-                    finishAffinity()
-                } else {
-                    Toast.makeText(this, "密码错误", Toast.LENGTH_SHORT).show()
-                }
-            }
-            .setNegativeButton("取消") { dialog, _ ->
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_exit_password, null)
+        val passwordInput = dialogView.findViewById<TextInputEditText>(R.id.passwordInput)
+        val btnConfirm = dialogView.findViewById<MaterialButton>(R.id.btnConfirm)
+        val btnCancel = dialogView.findViewById<MaterialButton>(R.id.btnCancel)
+        
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setCancelable(true)
+            .create()
+        
+        btnConfirm.setOnClickListener {
+            val password = passwordInput.text?.toString() ?: ""
+            if (password == EXIT_PASSWORD) {
                 dialog.dismiss()
+                // 关闭当前应用所有 Activity
+                finishAffinity()
+            } else {
+                Toast.makeText(this, "密码错误", Toast.LENGTH_SHORT).show()
+                passwordInput.text?.clear()
             }
-            .show()
+        }
+        
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+        
+        dialog.show()
     }
 
     override fun onDestroy() {
