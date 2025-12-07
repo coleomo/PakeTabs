@@ -276,7 +276,7 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
     )
 
     companion object {
-        private const val DEFAULT_HOME_URL = "https://juejin.cn/"
+        private const val DEFAULT_HOME_URL = "http://s.tabook.cn:9999/"
         private const val MENU_EXIT_APP = 1001
         private const val EXIT_PASSWORD = "123456"
     }
