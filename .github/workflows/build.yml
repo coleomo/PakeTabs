@@ -65,9 +65,9 @@ jobs:
               uses: softprops/action-gh-release@v1
               with:
                   files: app/build/outputs/apk/debug/*.apk
-                  tag_name: '${{ env.NAME }}'
+                  tag_name: ${{ github.ref_name }}
                   name: '${{ env.NAME }} v${{ env.VERSION }}'
-                  body: '${{ env.PUBBODY }}'
+                  body: 'PakeTabs Client Build'
                   draft: false
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
