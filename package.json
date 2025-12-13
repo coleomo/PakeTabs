@@ -1,0 +1,25 @@
+{
+    "name": "paketabs",
+    "version": "1.0.0",
+    "description": "paketabs web",
+    "homepage": "https://github.com/coleomo/PakeTabs#readme",
+    "bugs": {
+        "url": "https://github.com/coleomo/PakeTabs/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/coleomo/PakeTabs.git"
+    },
+    "license": "ISC",
+    "author": "",
+    "type": "commonjs",
+    "scripts": {
+        "worker:pp": "node scripts/ppworker.cjs"
+    },
+    "dependencies": {
+        "commander": "^13.1.0",
+        "fs-extra": "^11.3.0",
+        "png-to-ico": "^3.0.1",
+        "sharp": "^0.34.5"
+    }
+}

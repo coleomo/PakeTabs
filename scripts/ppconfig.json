@@ -1,0 +1,10 @@
+{
+    "name": "PakeTabs11",
+    "version": "1.0.0",
+    "url": "https://www.baidu.com",
+    "password": "222222",
+    "input": "./app-icon.png",
+    "output": "./res",
+    "copyTo": "./app/src/main/res",
+    "androidResDir": "./app/src/main/res"
+}
