@@ -278,6 +278,6 @@ class MainActivity : AppCompatActivity(), BrowserTabFragment.TabHost {
     companion object {
         private const val DEFAULT_HOME_URL = "https://www.pakeplus.com"
         private const val MENU_EXIT_APP = 1001
-        private const val EXIT_PASSWORD = "222222"
+        private const val EXIT_PASSWORD = "666666"
     }
 }
