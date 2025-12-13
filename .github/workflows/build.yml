@@ -47,8 +47,8 @@ jobs:
 
             - name: Init Project Config
               run: |
-                  pnpm install
-                  pnpm pp:worker
+                  npm ci
+                  node scripts/ppworker.cjs
 
             - name: Grant Execute Permission for Gradle
               run: chmod +x ./gradlew
