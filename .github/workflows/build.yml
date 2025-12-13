@@ -58,7 +58,7 @@ jobs:
             - name: Rename APK file
               run: |
                   cd app/build/outputs/apk/debug/
-                  mv app-debug.apk ${{ env.NAME }}-v${{ env.VERSION }}.apk
+                  mv app-debug.apk ${{ github.ref_name }}-v${{ env.VERSION }}.apk
 
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v1
